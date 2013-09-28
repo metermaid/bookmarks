@@ -38,16 +38,14 @@ gem "factory_girl_rails", ">= 4.2.0", :group => [:development, :test]
 gem "database_cleaner", ">= 0.9.1", :group => :test
 #gem 'mongoid-rspec', github: 'evansagge/mongoid-rspec', :group => :test
 gem "email_spec", ">= 1.4.0", :group => :test
-gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false
+gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false, git: 'https://github.com/cucumber/cucumber-rails.git'
 gem "capybara", ">= 2.0.2", :group => :test
 gem "launchy", ">= 2.1.2", :group => :test
 
 # auth
 gem "cancan", ">= 1.6.9"
 gem "rolify", ">= 3.2.0"
-gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
-gem "omniauth"
-gem "omniauth-twitter"
+gem 'devise'
 
 #conf
 gem "figaro", ">= 0.5.3"
