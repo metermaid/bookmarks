@@ -44,8 +44,9 @@ gem "launchy", ">= 2.1.2", :group => :test
 
 # auth
 gem "cancan", ">= 1.6.9"
-gem "rolify", ">= 3.2.0"
-gem 'devise'
+#gem "rolify", ">= 3.2.0"
+gem "omniauth"
+gem "omniauth-twitter"
 
 #conf
 gem "figaro", ">= 0.5.3"
