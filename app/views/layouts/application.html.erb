@@ -5,10 +5,30 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400|Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-<%= yield %>
-
+<header id="top_navigation">
+	<nav>
+		<a href="">News</a>
+		<a href="">Politics</a>
+		<a href="">Feminism</a>
+	</nav>
+</header>
+<header id="masthead">
+<div class="header-content">
+  <%= link_to root_path do %>
+    <h1>Bookmarks</h1>
+  <% end %>
+  <nav>
+  <%= yield 'section_nav' %>
+  </nav>
+</div>
+</header>
+<div class="main">
+  <section>
+  <%= yield %>
+  </section>
+</div>
 </body>
 </html>

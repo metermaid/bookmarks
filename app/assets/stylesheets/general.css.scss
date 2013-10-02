@@ -1,0 +1,110 @@
+@import "bourbon";
+@import "neat";
+
+body {
+  font: 13px/20px 'Gentium Book Basic', serif;
+  color: #111;
+  background-color: #DED9D2;
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: normal;
+  margin: 10px 0px;
+}
+
+h1 {
+  font-size: 38px;
+  line-height: 44px;
+}
+
+img {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+section {
+  padding: 60px 0;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.f-center {
+  margin: 0 auto;
+}
+
+.button {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #8bd7f1;
+  font-family: Montserrat, sans-serif;
+  color: #111;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  &.cancel {
+    background-color: #fa9c9c;
+  }
+  &.confirm {
+    background-color: #c2f6c6;
+  }
+  &.secondary {
+    background-color: #d2dadc;
+  }
+}
+header#top_navigation {
+  background-color: #201B2C;
+  color: #feffff;
+  padding: 8px;
+  margin: 0;
+  nav {
+    @include outer-container;
+    a {
+      color: #cecccc;
+      text-decoration: none;
+      padding: 0 10px;
+    }
+  }
+}
+header#masthead {
+  background-color: #9C5567;
+  .header-content {
+    @include outer-container;
+    padding: 10px 0;
+    .logo {
+      @include span-columns(1.5 of 12);
+    }
+    h1 {
+      @include span-columns(3 of 12);
+      color: #ffffff;
+      font-weight: bold;
+    }
+    nav {
+      @include span-columns(7 of 12);
+      margin-top: 18px;
+      text-align: right;
+      .text {
+        border-bottom: 3px #8bd7f1 solid;
+        margin-right: 6px;
+        color: #111;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      @media screen and (max-width: 480px) {
+        @include span-columns(12 of 12);
+      }
+    }
+  }
+}
+div.main {
+  @include outer-container;
+}

@@ -1,24 +1,21 @@
 source 'https://rubygems.org'
 
 gem 'rails', "~> 4.0.0"
-
 gem 'journey', :git => 'git://github.com/rails/journey.git' 
 
 # server
 gem 'thin'
-
 gem "rails_12factor", :group => :production # rails dev on heroku
 
 # db
 gem 'mongoid', github: 'mongoid/mongoid'
 
-gem "analytics-ruby" # Segment.io as an anaytics solution (https://github.com/segmentio/analytics-ruby)
-
-gem 'high_voltage' #static pages
-
-
+# content / plugin-y
 # gem 'searchkick' #searching
-gem 'acts-as-taggable-on' # tags
+gem 'mongoid_taggable' # tags
+# gem 'pismo' # scraping for links
+gem 'high_voltage' #static pages
+# gem "analytics-ruby"
 
 # asset-y
 #gem 'sass-rails', github: 'rails/sass-rails'
@@ -31,6 +28,7 @@ gem 'jquery-rails'
 # gem "simple_form", ">= 2.1.0"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "font-awesome-rails"
+gem 'turbolinks'
 
 #test, etc.
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
@@ -44,12 +42,10 @@ gem "launchy", ">= 2.1.2", :group => :test
 
 # auth
 gem "cancan", ">= 1.6.9"
-#gem "rolify", ">= 3.2.0"
 gem "omniauth"
 gem "omniauth-twitter"
 
 #conf
 gem "figaro", ">= 0.5.3"
-
 gem "better_errors", ">= 0.3.2", :group => :development
 gem "binding_of_caller", ">= 0.6.8", :group => :development

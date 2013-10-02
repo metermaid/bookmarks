@@ -1,5 +1,4 @@
 class User
-
 	include Mongoid::Document
 
 	#rolify :before_add => :before_add_method
@@ -8,6 +7,8 @@ class User
 	field :uid, type: String
 	field :name, type: String
 	field :email, type: String
+
+	has_many :bookmarks
 
 	def self.create_with_omniauth(auth)
 		create! do |user|
