@@ -109,7 +109,10 @@ header#masthead {
         border-bottom-right-radius: 0;
         margin-left: 3px;
         padding: 4px 10px;
-        background-color: #E8E3E2;
+        background-color: #D67777;
+        &.active {
+          background-color: #E8E3E2;
+        }
       }
       @media screen and (max-width: 480px) {
         @include span-columns(12 of 12);
@@ -122,6 +125,7 @@ div.main {
   article {
     @include span-columns(12 of 12);
     margin: 10px 0 20px;
+    padding: 0 3px;
     .field {
       margin-bottom: 10px;
       overflow: auto;
