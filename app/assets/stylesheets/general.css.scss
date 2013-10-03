@@ -41,7 +41,7 @@ img {
 .button {
   display: inline-block;
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 3px;
   background-color: #D67777;
   font-family: 'Open Sans', sans-serif;
   color: #111;
@@ -74,9 +74,11 @@ header#top_navigation {
 }
 header#masthead {
   background-color: #9C5567;
+  border-bottom: 4px #E8E3E2 solid;
   .header-content {
     @include outer-container;
     padding: 10px 0;
+    position: relative;
     .logo {
       @include span-columns(1.5 of 12);
     }
@@ -87,8 +89,18 @@ header#masthead {
     }
     nav {
       @include span-columns(7 of 12);
-      margin-top: 18px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
       text-align: right;
+      .button {
+        display: inline-block;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-left: 3px;
+        padding: 4px 10px;
+        background-color: #E8E3E2;
+      }
       @media screen and (max-width: 480px) {
         @include span-columns(12 of 12);
       }
@@ -98,6 +110,10 @@ header#masthead {
 div.main {
   @include outer-container;
   .meta {
-    color: #E8E3E2;
+    color: #DB6362;
+    a {
+      color: #E8E3E2;
+      text-decoration: none;
+    }
   }
 }
