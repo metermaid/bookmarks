@@ -85,6 +85,7 @@ header#top_navigation {
 header#masthead {
   background-color: #9C5567;
   border-bottom: 4px #E8E3E2 solid;
+  overflow: auto;
   .header-content {
     @include outer-container;
     padding: 10px 0;
@@ -96,6 +97,11 @@ header#masthead {
       @include span-columns(3 of 12);
       color: #ffffff;
       font-weight: bold;
+      @media screen and (max-width: 600px) {
+        @include span-columns(12 of 12);
+        margin-bottom: 20px;
+        text-align: center;
+      }
     }
     nav {
       @include span-columns(7 of 12);
@@ -114,8 +120,9 @@ header#masthead {
           background-color: #E8E3E2;
         }
       }
-      @media screen and (max-width: 480px) {
+      @media screen and (max-width: 600px) {
         @include span-columns(12 of 12);
+        text-align: center;
       }
     }
   }
