@@ -21,7 +21,16 @@
     <h1>Bookmarks</h1>
   <% end %>
   <nav>
-  <%= yield 'section_nav' %>
+    <%= yield 'section_nav' %>
+      <% if current_user %>
+      <span>
+          <%= link_to "Logout", logout_path, method: :delete, class: "button secondary" %>
+      </span>
+      <% else %>
+      <span>
+          <%= link_to "Login", login_path, class: "button" %>
+      </span>
+      <% end %>
   </nav>
 </div>
 </header>

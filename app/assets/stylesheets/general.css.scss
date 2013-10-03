@@ -2,9 +2,9 @@
 @import "neat";
 
 body {
-  font: 13px/20px 'Gentium Book Basic', serif;
-  color: #111;
-  background-color: #DED9D2;
+  font: 14px/20px 'Gentium Book Basic', serif;
+  color: #201B2C;
+  background-color: #DBBEAE;
   margin: 0;
 }
 
@@ -19,15 +19,15 @@ h1 {
   line-height: 44px;
 }
 
+a {
+  color: #74574B;
+}
+
 img {
   display: inline-block;
   height: auto;
   max-width: 100%;
   vertical-align: middle;
-}
-
-section {
-  padding: 60px 0;
 }
 
 .t-center {
@@ -42,21 +42,20 @@ section {
   display: inline-block;
   padding: 6px 10px;
   border-radius: 6px;
-  background-color: #8bd7f1;
-  font-family: Montserrat, sans-serif;
+  background-color: #D67777;
+  font-family: 'Open Sans', sans-serif;
   color: #111;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
   &.cancel {
-    background-color: #fa9c9c;
+    background-color: #D67777;
   }
   &.confirm {
-    background-color: #c2f6c6;
+    background-color: #D67777;
   }
   &.secondary {
-    background-color: #d2dadc;
+    background-color: #D67777;
   }
 }
 header#top_navigation {
@@ -90,15 +89,6 @@ header#masthead {
       @include span-columns(7 of 12);
       margin-top: 18px;
       text-align: right;
-      .text {
-        border-bottom: 3px #8bd7f1 solid;
-        margin-right: 6px;
-        color: #111;
-        font-size: 14px;
-        text-align: center;
-        text-decoration: none;
-        text-transform: uppercase;
-      }
       @media screen and (max-width: 480px) {
         @include span-columns(12 of 12);
       }
@@ -107,4 +97,7 @@ header#masthead {
 }
 div.main {
   @include outer-container;
+  .meta {
+    color: #E8E3E2;
+  }
 }

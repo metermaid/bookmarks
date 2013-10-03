@@ -1,29 +1,20 @@
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.title %></td>
-        <td><%= bookmark.description %></td>
-        <td><%= bookmark.user %></td>
-        <td><%= link_to 'Show', bookmark %></td>
-        <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
-        <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<section>
+  <% @bookmarks.each do |bookmark| %>
+    <article>
+      <h3><%= link_to bookmark.title, bookmark.url %></h3>
+      <div><%= bookmark.description %></div>
+      <aside class="meta">
+        Submitted <%= distance_of_time_in_words_to_now(bookmark.created_at) %> ago by <%= bookmark.user_name %> &bullet;
+          <%= link_to 'Show', bookmark %>
+        <% if can? :update, bookmark %> &bullet;
+          <%= link_to 'Edit', edit_bookmark_path(bookmark) %> &bullet;
+          <%= link_to 'Delete', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </aside>
+    </article>
+  <% end %>
+</section>
 
 <br>
 
-<%= link_to 'New Bookmark', new_bookmark_path %>
+<%= link_to 'New Bookmark', new_bookmark_path, class: "button" %>

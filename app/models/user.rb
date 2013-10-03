@@ -7,8 +7,13 @@ class User
 	field :uid, type: String
 	field :name, type: String
 	field :email, type: String
+	field :role, type: String
 
 	has_many :bookmarks
+
+	def has_role?(new_role)
+		role.present? and role == new_role
+	end
 
 	def self.create_with_omniauth(auth)
 		create! do |user|

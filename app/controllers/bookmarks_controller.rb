@@ -1,4 +1,5 @@
 class BookmarksController < ApplicationController
+  load_and_authorize_resource
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
 
   # GET /bookmarks
@@ -22,6 +23,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   def create
     @bookmark = Bookmark.new(bookmark_params)
+    @bookmark.user = current_user
 
     if @bookmark.save
       redirect_to @bookmark, notice: 'Bookmark was successfully created.'
@@ -53,6 +55,6 @@ class BookmarksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bookmark_params
-      params.require(:bookmark).permit(:title, :description, :user)
+      params.require(:bookmark).permit(:title, :description, :user, :url, :tags)
     end
 end
