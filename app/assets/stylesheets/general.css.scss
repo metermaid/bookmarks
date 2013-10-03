@@ -58,6 +58,16 @@ img {
     background-color: #D67777;
   }
 }
+input, textarea {
+  display: inline-block;
+  margin: 0;
+  padding: 0.8em 1.2em;
+
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  border: 1px solid #eee;
+}
+
 header#top_navigation {
   background-color: #201B2C;
   color: #feffff;
@@ -110,16 +120,34 @@ header#masthead {
 div.main {
   @include outer-container;
   article {
+    @include span-columns(12 of 12);
     margin: 10px 0 20px;
+    .field {
+      margin-bottom: 10px;
+      overflow: auto;
+      label {
+        @include span-columns(1 of 12);
+      }
+      input, textarea {
+        @include span-columns(7 of 12);
+      }
+    }
     h3 {
       margin-bottom: 4px;
     }
+    .tags {
+      font: 12px/14px 'Gentium Book Basic', serif;
+      color: #E8E3E2;    
+    }
     .meta {
       font: 12px/14px 'Open Sans', sans-serif;
-      color: #E8E3E2;
+      color: #9C5567;
       a {
         color: #9C5567;
         text-decoration: none;
+        &:hover {
+          font-weight: bold;
+        }
       }
     }
   }

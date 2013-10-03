@@ -1,19 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @bookmark.title %>
-</p>
+<article>
+  <h3><%= link_to @bookmark.title, @bookmark.url %></h3>
+  <div><%= @bookmark.description %></div>
+  <div class="tags"><%= @bookmark.tags %></div>
+  <aside class="meta">
+    Saved <%= distance_of_time_in_words_to_now(@bookmark.created_at) %> ago by <%= @bookmark.user_name %>
+    <% if can? :update, @bookmark %> &bullet;
+      <%= link_to 'Edit', edit_bookmark_path(@bookmark) %> &bullet;
+      <%= link_to 'Delete', @bookmark, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </aside>
+</article>
 
-<p>
-  <strong>Description:</strong>
-  <%= @bookmark.description %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @bookmark.user %>
-</p>
-
-<%= link_to 'Edit', edit_bookmark_path(@bookmark) %> |
-<%= link_to 'Back', bookmarks_path %>
+<%= content_for 'section_nav' do %>
+  <% if can? :new, Bookmark %>
+    <span><%= link_to 'New Bookmark', new_bookmark_path, class: "button" %></span>
+  <% end %>
+<% end %>
