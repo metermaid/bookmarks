@@ -4,11 +4,22 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks
   def index
-    @bookmarks = Bookmark.all
+    order = params[:order]
+    find_options = {
+       :per_page => params[:per_page] || 7,
+       :page => params[:page] || 1,
+       :order => order
+    }
+    @bookmarks = Bookmark.paginate(find_options)
   end
 
   # GET /bookmarks/1
   def show
+  end
+
+  # GET /bookmarks/1
+  def tagged_with
+    @bookmark = Bookmark.tagged_with_all(params[:tags])
   end
 
   # GET /bookmarks/new

@@ -16,6 +16,7 @@ gem 'mongoid_taggable' # tags
 # gem 'pismo' # scraping for links
 gem 'high_voltage' #static pages
 # gem "analytics-ruby"
+gem 'will_paginate_mongoid' #pagination, obvs
 
 # asset-y
 #gem 'sass-rails', github: 'rails/sass-rails'

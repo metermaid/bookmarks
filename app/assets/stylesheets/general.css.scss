@@ -11,7 +11,7 @@ body {
 h1, h2, h3, h4 {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: normal;
-  margin: 10px 0px;
+  margin: 0px;
 }
 
 h1 {
@@ -109,11 +109,18 @@ header#masthead {
 }
 div.main {
   @include outer-container;
-  .meta {
-    color: #DB6362;
-    a {
+  article {
+    margin: 10px 0 20px;
+    h3 {
+      margin-bottom: 4px;
+    }
+    .meta {
+      font: 12px/14px 'Open Sans', sans-serif;
       color: #E8E3E2;
-      text-decoration: none;
+      a {
+        color: #9C5567;
+        text-decoration: none;
+      }
     }
   }
 }

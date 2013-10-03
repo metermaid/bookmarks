@@ -14,8 +14,9 @@
     </article>
   <% end %>
 </section>
-
-<br>
+<div>
+<%= will_paginate @posts %>
+</div>
 <%= content_for 'section_nav' do %>
 <% if can? :new, Bookmark %>
 <span>
