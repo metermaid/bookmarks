@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :user_signed_in?
   helper_method :correct_user?
+  helper_method :tags
   
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
@@ -35,6 +36,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
-
+    def tags
+      @tags = Bookmark.tags
+    end
 
 end

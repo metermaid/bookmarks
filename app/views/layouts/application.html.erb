@@ -10,9 +10,9 @@
 <body>
 <header id="top_navigation">
 	<nav>
-		<a href="">News</a>
-		<a href="">Politics</a>
-		<a href="">Feminism</a>
+    <% tags.each do |tag| %>
+      <span><%= link_to tag, bookmarks_url(:tags => tag) %></span>
+    <% end %>
 	</nav>
 </header>
 <header id="masthead">

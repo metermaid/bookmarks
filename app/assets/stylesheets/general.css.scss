@@ -137,7 +137,11 @@ div.main {
     }
     .tags {
       font: 12px/14px 'Gentium Book Basic', serif;
-      color: #E8E3E2;    
+      color: #E8E3E2;
+      a {
+        color: #E8E3E2;
+        text-decoration: none;
+      }
     }
     .meta {
       font: 12px/14px 'Open Sans', sans-serif;
