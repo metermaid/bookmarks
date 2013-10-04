@@ -3,8 +3,10 @@ Bookmarks::Application.routes.draw do
   resources :bookmarks do
     collection do
       get 'search'
+      get 'feed'
     end
   end
+  get '/feed/' => 'bookmarks#feed'
 
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/failure' => 'sessions#failure'

@@ -8,9 +8,24 @@ class BookmarksController < ApplicationController
     @menu_item = "favourites" if params[:favourites]
     query = Bookmark.scoped
     query = query.tagged_with_all(params[:tags]) if params[:tags]
+    query = query.by_date(params[:date]) if params[:date]
     query = query.favourites if params[:favourites]
     @bookmarks = query.desc(:created_at).page(params[:page])
     @days = @bookmarks.group_by { |t| t.created_at.beginning_of_day }
+  end
+
+  # GET /bookmarks/feed
+  def feed
+    bookmarks = Bookmark.desc(:created_at)
+    @title = "Bookmarks"
+    @days = bookmarks.group_by { |t| t.created_at.beginning_of_day } 
+    @updated = bookmarks.first.updated_at unless bookmarks.empty?
+
+    respond_to do |format|
+      format.atom { render :layout => false }
+      format.rss { redirect_to feed_path(:format => :atom), :status => :moved_permanently }
+    end
+
   end
 
   # GET /bookmarks/search

@@ -5,6 +5,8 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= auto_discovery_link_tag :atom, "/feed" %>
+  <%= auto_discovery_link_tag :rss, "/feed.rss" %>
   <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400|Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>

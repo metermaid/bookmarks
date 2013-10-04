@@ -10,7 +10,12 @@ class Bookmark
   belongs_to :user
 
 	scope :favourites, where(favourite: true)
-
+	scope :by_date, (lambda do |date| 
+	  dt = DateTime.strptime(date, "%Y-%m-%d")
+	  bod = dt.beginning_of_day
+	  eod = dt.end_of_day
+	  where(:created_at.gte => bod, :created_at.lte => eod)
+	end)
 
   before_save :add_http
 
