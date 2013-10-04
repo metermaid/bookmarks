@@ -1,0 +1,16 @@
+<span><%= link_to 'Latest', bookmarks_path, class: "button #{"active" if @menu_item == "index"}", id: "index" %></span>
+<span><%= link_to 'Favourites', bookmarks_path, class: "button #{"active" if @menu_item == "favourites"}", id: "favourites" %></span>
+<% if can? :new, Bookmark %>
+  <span><%= link_to 'New Bookmark', new_bookmark_path, class: "button #{"active" if @menu_item == "new"}", id: "new" %></span>
+<% end %>
+
+<% if current_user %>
+<span>
+    <%= link_to current_user.name, user_path(current_user), class: "button secondary #{"active" if @menu_item == "profile"}", id: "profile" %>
+    <%= link_to "Logout", logout_path, method: :delete, class: "button secondary" %>
+</span>
+<% else %>
+<span>
+    <%= link_to "Login", login_path, class: "button" %>
+</span>
+<% end %>

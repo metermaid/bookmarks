@@ -1,4 +1,5 @@
 Bookmarks::Application.routes.draw do
+  resources :users, only: :show
   resources :bookmarks
 
   get '/auth/:provider/callback' => 'sessions#create'
