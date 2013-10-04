@@ -138,9 +138,13 @@ header#masthead {
 }
 div.main {
   @include outer-container;
+  section {
+    @include span-columns(12 of 12);
+    margin-top: 10px;
+  }
   article {
     @include span-columns(12 of 12);
-    margin: 10px 0 20px;
+    margin: 5px 0 20px;
     padding: 0 3px;
     .field {
       margin-bottom: 10px;

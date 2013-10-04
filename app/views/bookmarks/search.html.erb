@@ -1,0 +1,36 @@
+<section>
+  <h2>Search results</h2>
+  <% @bookmarks.each do |bookmark| %>
+    <article>
+      <h3><%= link_to bookmark.title, bookmark.url %></h3>
+      <div><%= bookmark.description %></div>
+      <div class="tags"><% bookmark.tags_array.each do |tag| %>
+                          <%= link_to "##{tag}", bookmarks_url(:tags => tag) %>
+                        <% end %></div>
+      <aside class="meta">
+        Saved <%= distance_of_time_in_words_to_now(bookmark.created_at) %> ago by <%= bookmark.user_name %> &bullet;
+          <%= link_to 'Comments', bookmark %>
+        <% if can? :update, bookmark %> &bullet;
+          <%= link_to 'Edit', edit_bookmark_path(bookmark) %> &bullet;
+          <%= link_to 'Delete', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </aside>
+    </article>
+  <% end %>
+  <% if @bookmarks.empty? %>
+    <article>
+      <p>No bookmarks were found.</p>
+    </article>
+  <% end %>
+</section>
+<div>
+<%= paginate @bookmarks %>
+</div>
+
+<%= content_for 'section_nav' do %>
+  <span><%= link_to 'Latest', bookmarks_path, class: "button active" %></span>
+  <span><%= link_to 'Favourites', bookmarks_path, class: "button" %></span>
+  <% if can? :new, Bookmark %>
+    <span><%= link_to 'New Bookmark', new_bookmark_path, class: "button" %></span>
+  <% end %>
+<% end %>

@@ -1,6 +1,10 @@
 Bookmarks::Application.routes.draw do
   resources :users, only: :show
-  resources :bookmarks
+  resources :bookmarks do
+    collection do
+      get 'search'
+    end
+  end
 
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/failure' => 'sessions#failure'

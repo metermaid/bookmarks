@@ -5,15 +5,17 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks
   def index
-    if params[:query].present?
-      @bookmarks = Bookmark.search params[:query], page: params[:page]
-    else
-      @menu_item = "favourites" if params[:favourites]
-      query = Bookmark.scoped
-      query = query.tagged_with_all(params[:tags]) if params[:tags]
-      query = query.favourites if params[:favourites]
-      @bookmarks = query.desc(:created_at).page(params[:page])
-    end
+    @menu_item = "favourites" if params[:favourites]
+    query = Bookmark.scoped
+    query = query.tagged_with_all(params[:tags]) if params[:tags]
+    query = query.favourites if params[:favourites]
+    @bookmarks = query.desc(:created_at).page(params[:page])
+    @days = @bookmarks.group_by { |t| t.created_at.beginning_of_day }
+  end
+
+  # GET /bookmarks/search
+  def search
+    @bookmarks = Bookmark.search params[:query], page: params[:page]
   end
 
   # GET /bookmarks/1

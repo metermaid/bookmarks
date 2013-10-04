@@ -13,7 +13,7 @@
     <% tags.each do |tag| %>
       <span><%= link_to tag, bookmarks_url(:tags => tag) %></span>
     <% end %>
-    <%= form_tag bookmarks_path, method: :get, class: 'search' do %>
+    <%= form_tag search_bookmarks_path, method: :get, class: 'search' do %>
       <%= text_field_tag :query, params[:query] %>
       <%= submit_tag "Search", name: nil %>
     <% end %>
