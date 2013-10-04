@@ -76,11 +76,11 @@ test:
         retry_interval: 0
 
 <% if ENV['MONGOLAB_URI'] %>
-  production:
-    sessions:
-      default:
-        uri: <%= ENV['MONGOLAB_URI'] %>
-        options:
-          skip_version_check: true
-          safe: true
+production:
+  sessions:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %>
+      options:
+        skip_version_check: true
+        safe: true
 <% end %>
