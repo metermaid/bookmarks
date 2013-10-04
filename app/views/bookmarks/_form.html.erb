@@ -28,6 +28,10 @@
     <%= f.label :tags %>
     <%= f.text_field :tags %>
   </div>
+  <div class="field">
+    <%= f.label :favourite %>
+    <%= f.check_box :favourite, {}, "true", "false" %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -6,7 +6,11 @@ class Bookmark
   field :title, type: String
   field :url, type: String
   field :description, type: String
+  field :favourite, type: Mongoid::Boolean
   belongs_to :user
+
+	scope :favourites, where(favourite: true)
+
 
   before_save :add_http
 

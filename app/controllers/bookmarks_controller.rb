@@ -5,11 +5,14 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks
   def index
-    tags = params[:tags] || ''
     if params[:query].present?
       @bookmarks = Bookmark.search params[:query], page: params[:page]
     else
-      @bookmarks = Bookmark.tagged_with_all(params[:tags]).page(params[:page])
+      @menu_item = "favourites" if params[:favourites]
+      query = Bookmark.scoped
+      query = query.tagged_with_all(params[:tags]) if params[:tags]
+      query = query.favourites if params[:favourites]
+      @bookmarks = query.desc(:created_at).page(params[:page])
     end
   end
 
@@ -70,6 +73,6 @@ class BookmarksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bookmark_params
-      params.require(:bookmark).permit(:title, :description, :user, :url, :tags)
+      params.require(:bookmark).permit(:title, :description, :user, :url, :tags, :favourite)
     end
 end

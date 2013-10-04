@@ -1,5 +1,5 @@
 <span><%= link_to 'Latest', bookmarks_path, class: "button #{"active" if @menu_item == "index"}", id: "index" %></span>
-<span><%= link_to 'Favourites', bookmarks_path, class: "button #{"active" if @menu_item == "favourites"}", id: "favourites" %></span>
+<span><%= link_to 'Favourites', bookmarks_path(favourites: true), class: "button #{"active" if @menu_item == "favourites"}", id: "favourites" %></span>
 <% if can? :new, Bookmark %>
   <span><%= link_to 'New Bookmark', new_bookmark_path, class: "button #{"active" if @menu_item == "new"}", id: "new" %></span>
 <% end %>
