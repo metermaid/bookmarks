@@ -11,13 +11,12 @@ gem "rails_12factor", :group => :production # rails dev on heroku
 gem 'mongoid', github: 'mongoid/mongoid'
 
 # content / plugin-y
-# gem 'searchkick' #searching
+gem 'searchkick' #searching
 gem 'mongoid_taggable' # tags
 # gem 'pismo' # scraping for links
 gem 'high_voltage' #static pages
 # gem "analytics-ruby"
-gem 'will_paginate_mongoid' #pagination, obvs
-gem 'mongoid_commentable' # commenting
+gem 'kaminari' #pagination
 
 # asset-y
 #gem 'sass-rails', github: 'rails/sass-rails'

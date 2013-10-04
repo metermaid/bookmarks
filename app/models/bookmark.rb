@@ -10,12 +10,19 @@ class Bookmark
 
   before_save :add_http
 
+  paginates_per 7
+  searchkick
+
   def user_name
   	if user.present?
   		user.name
   	else
   		"Anonymous"
   	end
+  end
+
+  def search_data
+    as_json only: [:title, :descrption, :tags]
   end
 
   private

@@ -79,6 +79,15 @@ header#top_navigation {
       color: #cecccc;
       text-decoration: none;
       padding: 0 10px;
+      line-height: 30px;
+    }
+    form.search {
+      float: right;
+      input {
+        background-color: #000;
+        border: 0;
+        color: #cecccc;
+      }
     }
   }
 }

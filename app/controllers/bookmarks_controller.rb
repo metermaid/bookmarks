@@ -1,17 +1,16 @@
 class BookmarksController < ApplicationController
   load_and_authorize_resource
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
+  before_action :set_menuitem, only: [:index, :new]
 
   # GET /bookmarks
   def index
-    order = params[:order]
     tags = params[:tags] || ''
-    find_options = {
-       :per_page => params[:per_page] || 7,
-       :page => params[:page] || 1,
-       :order => order
-    }
-    @bookmarks = Bookmark.tagged_with_all(params[:tags]).paginate(find_options)
+    if params[:query].present?
+      @bookmarks = Bookmark.search params[:query], page: params[:page]
+    else
+      @bookmarks = Bookmark.tagged_with_all(params[:tags]).page(params[:page])
+    end
   end
 
   # GET /bookmarks/1
@@ -54,10 +53,19 @@ class BookmarksController < ApplicationController
     redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.'
   end
 
+  # GET
+  def autocomplete
+    render json: Bookmark.search(params[:query], autocomplete: true, limit: 10).map(&:name)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bookmark
       @bookmark = Bookmark.find(params[:id])
+    end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_menuitem
+      @menu_item = params[:action]
     end
 
     # Only allow a trusted parameter "white list" through.

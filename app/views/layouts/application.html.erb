@@ -13,6 +13,10 @@
     <% tags.each do |tag| %>
       <span><%= link_to tag, bookmarks_url(:tags => tag) %></span>
     <% end %>
+    <%= form_tag bookmarks_path, method: :get, class: 'search' do %>
+      <%= text_field_tag :query, params[:query] %>
+      <%= submit_tag "Search", name: nil %>
+    <% end %>
 	</nav>
 </header>
 <header id="masthead">
@@ -21,21 +25,13 @@
     <h1>Bookmarks</h1>
   <% end %>
   <nav>
-    <%= yield 'section_nav' %>
-      <% if current_user %>
-      <span>
-          <%= link_to "Logout", logout_path, method: :delete, class: "button secondary" %>
-      </span>
-      <% else %>
-      <span>
-          <%= link_to "Login", login_path, class: "button" %>
-      </span>
-      <% end %>
+    <%= render "layouts/navigation" %>
   </nav>
 </div>
 </header>
 <div class="main">
   <section>
+  <% if notice %><p id="notice"><%= notice %></p><% end %>
   <%= yield %>
   </section>
 </div>
