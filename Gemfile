@@ -6,6 +6,7 @@ gem 'journey', :git => 'git://github.com/rails/journey.git'
 # server
 gem 'thin'
 gem "rails_12factor", :group => :production # rails dev on heroku
+gem "heroku"
 
 # db
 gem 'mongoid', github: 'mongoid/mongoid'
@@ -13,7 +14,8 @@ gem 'mongoid', github: 'mongoid/mongoid'
 # content / plugin-y
 gem 'searchkick' #searching
 gem 'mongoid_taggable' # tags
-# gem 'pismo' # scraping for links
+gem 'pismo' # scraping for links
+# gem 'link_thumbnailer' # scraping for thumbs
 gem 'high_voltage' #static pages
 # gem "analytics-ruby"
 gem 'kaminari' #pagination
