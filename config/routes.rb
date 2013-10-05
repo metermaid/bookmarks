@@ -6,7 +6,7 @@ Bookmarks::Application.routes.draw do
       get 'feed'
     end
   end
-  get '/feed/' => 'bookmarks#feed'
+  get '/feed/' => 'bookmarks#feed', defaults: { format: 'jpg' }
 
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/failure' => 'sessions#failure'

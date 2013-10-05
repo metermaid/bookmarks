@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
       tag_hash = {}
       tag_array = Bookmark.tags_with_weight.each { |a| tag_hash[a[0]] = a[1] }
       tag_hash = Hash[tag_hash.sort_by{|k, v| v}.reverse]
-      @tags = tag_hash.keys.take(10)
+      @tags = tag_hash.keys.take(7)
     end
 
 end
