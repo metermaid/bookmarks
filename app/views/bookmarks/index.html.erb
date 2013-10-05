@@ -1,5 +1,5 @@
 <section>
-  <% @days.sort.each do |day, bookmarks| %>
+  <% @days.sort.reverse.each do |day, bookmarks| %>
     <h2><%= day.beginning_of_day.strftime("%B %e, %Y") %></h2>
     <% bookmarks.each do |bookmark| %>
       <article>
