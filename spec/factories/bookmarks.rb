@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :bookmark do
     title "MyString"
     description "MyText"
-    user "MyString"
+    url "http"
   end
 end

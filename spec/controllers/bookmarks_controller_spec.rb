@@ -20,29 +20,32 @@ require 'spec_helper'
 
 describe BookmarksController do
 
+  before (:each) do
+    @bookmark = FactoryGirl.create(:bookmark)
+    @admin = FactoryGirl.create(:admin)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Bookmark. As you add validations to Bookmark, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "title" => "MyString" } }
+  let(:valid_attributes) { { "url" => "MyString" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # BookmarksController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { user_id: @admin.id } }
 
   describe "GET index" do
     it "assigns all bookmarks as @bookmarks" do
-      bookmark = Bookmark.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:bookmarks).should eq([bookmark])
+      assigns(:bookmarks).should eq([@bookmark])
     end
   end
 
   describe "GET show" do
     it "assigns the requested bookmark as @bookmark" do
-      bookmark = Bookmark.create! valid_attributes
-      get :show, {:id => bookmark.to_param}, valid_session
-      assigns(:bookmark).should eq(bookmark)
+      get :show, {:id => @bookmark.to_param}, valid_session
+      assigns(:bookmark).should eq(@bookmark)
     end
   end
 
@@ -55,9 +58,8 @@ describe BookmarksController do
 
   describe "GET edit" do
     it "assigns the requested bookmark as @bookmark" do
-      bookmark = Bookmark.create! valid_attributes
-      get :edit, {:id => bookmark.to_param}, valid_session
-      assigns(:bookmark).should eq(bookmark)
+      get :edit, {:id => @bookmark.to_param}, valid_session
+      assigns(:bookmark).should eq(@bookmark)
     end
   end
 
@@ -85,14 +87,14 @@ describe BookmarksController do
       it "assigns a newly created but unsaved bookmark as @bookmark" do
         # Trigger the behavior that occurs when invalid params are submitted
         Bookmark.any_instance.stub(:save).and_return(false)
-        post :create, {:bookmark => { "title" => "invalid value" }}, valid_session
+        post :create, {:bookmark => { "url" => "invalid value" }}, valid_session
         assigns(:bookmark).should be_a_new(Bookmark)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Bookmark.any_instance.stub(:save).and_return(false)
-        post :create, {:bookmark => { "title" => "invalid value" }}, valid_session
+        post :create, {:bookmark => { "url" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -101,42 +103,33 @@ describe BookmarksController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested bookmark" do
-        bookmark = Bookmark.create! valid_attributes
-        # Assuming there are no other bookmarks in the database, this
-        # specifies that the Bookmark created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Bookmark.any_instance.should_receive(:update).with({ "title" => "MyString" })
-        put :update, {:id => bookmark.to_param, :bookmark => { "title" => "MyString" }}, valid_session
+        Bookmark.any_instance.should_receive(:update).with({ "url" => "http://www.url.com" })
+        put :update, {:id => @bookmark.to_param, :bookmark => { "url" => "http://www.url.com" }}, valid_session
       end
 
       it "assigns the requested bookmark as @bookmark" do
-        bookmark = Bookmark.create! valid_attributes
-        put :update, {:id => bookmark.to_param, :bookmark => valid_attributes}, valid_session
-        assigns(:bookmark).should eq(bookmark)
+        put :update, {:id => @bookmark.to_param, :bookmark => valid_attributes}, valid_session
+        assigns(:bookmark).should eq(@bookmark)
       end
 
       it "redirects to the bookmark" do
-        bookmark = Bookmark.create! valid_attributes
-        put :update, {:id => bookmark.to_param, :bookmark => valid_attributes}, valid_session
-        response.should redirect_to(bookmark)
+        put :update, {:id => @bookmark.to_param, :bookmark => valid_attributes}, valid_session
+        response.should redirect_to(@bookmark)
       end
     end
 
     describe "with invalid params" do
       it "assigns the bookmark as @bookmark" do
-        bookmark = Bookmark.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Bookmark.any_instance.stub(:save).and_return(false)
-        put :update, {:id => bookmark.to_param, :bookmark => { "title" => "invalid value" }}, valid_session
-        assigns(:bookmark).should eq(bookmark)
+        put :update, {:id => @bookmark.to_param, :bookmark => { "url" => "invalid value" }}, valid_session
+        assigns(:bookmark).should eq(@bookmark)
       end
 
       it "re-renders the 'edit' template" do
-        bookmark = Bookmark.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Bookmark.any_instance.stub(:save).and_return(false)
-        put :update, {:id => bookmark.to_param, :bookmark => { "title" => "invalid value" }}, valid_session
+        put :update, {:id => @bookmark.to_param, :bookmark => { "url" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
@@ -144,9 +137,8 @@ describe BookmarksController do
 
   describe "DELETE destroy" do
     it "destroys the requested bookmark" do
-      bookmark = Bookmark.create! valid_attributes
       expect {
-        delete :destroy, {:id => bookmark.to_param}, valid_session
+        delete :destroy, {:id => @bookmark.to_param}, valid_session
       }.to change(Bookmark, :count).by(-1)
     end
 

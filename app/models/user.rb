@@ -1,8 +1,6 @@
 class User
 	include Mongoid::Document
 
-	#rolify :before_add => :before_add_method
-
 	field :provider, type: String
 	field :uid, type: String
 	field :name, type: String
@@ -10,6 +8,11 @@ class User
 	field :role, type: String
 
 	has_many :bookmarks
+
+  validates_presence_of :name
+  validates_presence_of :uid
+  validates_presence_of :provider
+  validates_uniqueness_of :uid
 
 	def has_role?(new_role)
 		role.present? and role == new_role

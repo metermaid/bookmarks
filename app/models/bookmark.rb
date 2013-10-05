@@ -9,6 +9,8 @@ class Bookmark
   field :favourite, type: Mongoid::Boolean
   belongs_to :user
 
+  validates_presence_of :url
+
 	scope :favourites, where(favourite: true)
 	scope :by_date, (lambda do |date| 
 	  dt = DateTime.strptime(date, "%Y-%m-%d")
@@ -37,8 +39,8 @@ class Bookmark
   private
 
   def add_http
-  	unless url.start_with?('http') or url.start_with('https')
-  		url = 'http://' + url
+  	unless url.start_with?('http') or url.start_with?('https')
+  		url = "http://#{url}"
   	end
   end
 

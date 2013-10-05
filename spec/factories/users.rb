@@ -3,10 +3,11 @@ FactoryGirl.define do
     name 'Test User'
     email 'example@example.com'
     provider 'twitter'
-    uid 'something'
+    uid '123'
 
     factory :admin do
-      #  after(:create) {|user| user.add_role(:admin)}
+      role 'admin'
+      uid '123456'
     end
   end
 end
