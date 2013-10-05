@@ -73,11 +73,6 @@ class BookmarksController < ApplicationController
     redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.'
   end
 
-  # GET
-  def autocomplete
-    render json: Bookmark.search(params[:query], autocomplete: true, limit: 10).map(&:name)
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bookmark

@@ -16,20 +16,34 @@ describe User do
   end
 
   describe '#has_role?' do
-  	it "checks a user" do
-  		expect { @user.has_role?("user").should be_true }
-  		expect { @user.has_role?("admin").should be_false }
+  	context "a user needs its role checked" do
+      it "returns true and behaves as a user when they have no role" do
+  		  expect { @user.has_role?("user").should be_true }
+      end
+      before do
+        @user.role = "user"
+      end
+      it "returns true when it's checked to be a user" do
+        expect { @user.has_role?("user").should be_true }
+      end
+      it "returns false when it's checked to be an admin" do
+        expect { @user.has_role?("admin").should be_false }
+      end
   	end
     before do
       @admin = FactoryGirl.create(:admin)
     end
-  	it "checks an admin" do
-  		expect { @admin.has_role?("user").should be_false }
-  		expect { @admin.has_role?("admin").should be_true }
+    context "an admin needs its role checked" do
+      it "returns false when it's checked to be a user" do
+        expect { @admin.has_role?("user").should be_false }
+      end
+      it "returns false when it's checked to be an admin" do
+        expect { @admin.has_role?("admin").should be_true }
+      end
   	end
   end
 
-  describe '.find_or_create' do
+  describe '.create_with_omniauth' do
     context "no current account" do
       before(:each) do
         @auth = OmniAuth.config.mock_auth[:twitter]

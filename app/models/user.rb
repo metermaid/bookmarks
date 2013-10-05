@@ -15,7 +15,11 @@ class User
   validates_uniqueness_of :uid
 
 	def has_role?(new_role)
-		role.present? and role == new_role
+		if role.present?
+			role == new_role
+		else
+			new_role == "user"
+		end
 	end
 
 	def self.create_with_omniauth(auth)

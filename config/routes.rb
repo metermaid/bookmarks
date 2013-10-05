@@ -1,12 +1,17 @@
 Bookmarks::Application.routes.draw do
   resources :users, only: :show
+
+  resources :sessions, only: [:create, :new, :destroy] do
+    get 'failure'
+  end
+
   resources :bookmarks do
     collection do
       get 'search'
       get 'feed'
     end
   end
-  get '/feed/' => 'bookmarks#feed', defaults: { format: 'jpg' }
+  get '/feed/' => 'bookmarks#feed', defaults: { format: 'atom' }
 
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/failure' => 'sessions#failure'

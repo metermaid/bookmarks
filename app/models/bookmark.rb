@@ -10,6 +10,7 @@ class Bookmark
   belongs_to :user
 
   validates_presence_of :url
+  before_save :add_http
 
 	scope :favourites, where(favourite: true)
 	scope :by_date, (lambda do |date| 
@@ -19,7 +20,6 @@ class Bookmark
 	  where(:created_at.gte => bod, :created_at.lte => eod)
 	end)
 
-  before_save :add_http
 
   paginates_per 7
   searchkick
@@ -40,7 +40,7 @@ class Bookmark
 
   def add_http
   	unless url.start_with?('http') or url.start_with?('https')
-  		url = "http://#{url}"
+  		self.url = "http://#{self.url}"
   	end
   end
 
