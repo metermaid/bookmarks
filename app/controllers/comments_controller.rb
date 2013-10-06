@@ -18,16 +18,16 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to bookmark_path(@bookmark), notice: 'Comment was successfully posted.'
+      redirect_to @bookmark, notice: 'Comment was successfully posted.'
     else
-      redirect_to bookmark_path(@bookmark)
+      redirect_to @bookmark
     end
   end
 
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      redirect_to @comment, notice: 'Comment was successfully updated.'
+      redirect_to @bookmark, notice: 'Comment was successfully updated.'
     else
       render action: 'edit'
     end
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     @bookmark = Bookmark.find(params[:bookmark_id])
     @comment = @bookmark.comments.find(params[:id])
     @comment.destroy
-    redirect_to bookmark_path(@bookmark)
+    redirect_to @bookmark
   end
 
   private

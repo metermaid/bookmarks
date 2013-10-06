@@ -20,10 +20,15 @@ require 'spec_helper'
 
 describe CommentsController do
 
+  before (:each) do
+    @bookmark = FactoryGirl.create(:bookmark)
+    @admin = FactoryGirl.create(:admin)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Comment. As you add validations to Comment, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "body" => "MyText" } }
+  let(:valid_attributes) { { "body" => "MyText", "user" => @admin, "bookmark" => @bookmark } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -33,7 +38,7 @@ describe CommentsController do
   describe "GET edit" do
     it "assigns the requested comment as @comment" do
       comment = Comment.create! valid_attributes
-      get :edit, {:id => comment.to_param}, valid_session
+      get :edit, {:id => comment.to_param, :bookmark_id => @bookmark.id}, valid_session
       assigns(:comment).should eq(comment)
     end
   end
@@ -42,19 +47,19 @@ describe CommentsController do
     describe "with valid params" do
       it "creates a new Comment" do
         expect {
-          post :create, {:comment => valid_attributes}, valid_session
+          post :create, {:comment => valid_attributes, :bookmark_id => @bookmark.id}, valid_session
         }.to change(Comment, :count).by(1)
       end
 
       it "assigns a newly created comment as @comment" do
-        post :create, {:comment => valid_attributes}, valid_session
+        post :create, {:comment => valid_attributes, :bookmark_id => @bookmark.id}, valid_session
         assigns(:comment).should be_a(Comment)
         assigns(:comment).should be_persisted
       end
 
-      it "redirects to the created comment" do
-        post :create, {:comment => valid_attributes}, valid_session
-        response.should redirect_to(Comment.last)
+      it "redirects to the parent bookmark" do
+        post :create, {:comment => valid_attributes, :bookmark_id => @bookmark.id}, valid_session
+        response.should redirect_to(@bookmark)
       end
     end
 
@@ -62,15 +67,15 @@ describe CommentsController do
       it "assigns a newly created but unsaved comment as @comment" do
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        post :create, {:comment => { "body" => "invalid value" }}, valid_session
+        post :create, {:comment => { "body" => "invalid value" }, :bookmark_id => @bookmark.id}, valid_session
         assigns(:comment).should be_a_new(Comment)
       end
 
-      it "re-renders the 'new' template" do
+      it "re-renders the parent bookmark" do
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        post :create, {:comment => { "body" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        post :create, {:comment => { "body" => "invalid value" }, :bookmark_id => @bookmark.id}, valid_session
+        response.should redirect_to(@bookmark)
       end
     end
   end
@@ -84,19 +89,19 @@ describe CommentsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Comment.any_instance.should_receive(:update).with({ "body" => "MyText" })
-        put :update, {:id => comment.to_param, :comment => { "body" => "MyText" }}, valid_session
+        put :update, {:id => comment.to_param, :bookmark_id => @bookmark.id, :comment => { "body" => "MyText" }}, valid_session
       end
 
       it "assigns the requested comment as @comment" do
         comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
+        put :update, {:id => comment.to_param, :bookmark_id => @bookmark.id, :comment => valid_attributes}, valid_session
         assigns(:comment).should eq(comment)
       end
 
-      it "redirects to the comment" do
+      it "redirects to the parent bookmark" do
         comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
-        response.should redirect_to(comment)
+        put :update, {:id => comment.to_param, :bookmark_id => @bookmark.id, :comment => valid_attributes}, valid_session
+        response.should redirect_to(@bookmark)
       end
     end
 
@@ -105,7 +110,7 @@ describe CommentsController do
         comment = Comment.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => comment.to_param, :comment => { "body" => "invalid value" }}, valid_session
+        put :update, {:id => comment.to_param, :bookmark_id => @bookmark.id, :comment => { "body" => "invalid value" }}, valid_session
         assigns(:comment).should eq(comment)
       end
 
@@ -113,7 +118,7 @@ describe CommentsController do
         comment = Comment.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => comment.to_param, :comment => { "body" => "invalid value" }}, valid_session
+        put :update, {:id => comment.to_param, :bookmark_id => @bookmark.id, :comment => { "body" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
@@ -123,14 +128,14 @@ describe CommentsController do
     it "destroys the requested comment" do
       comment = Comment.create! valid_attributes
       expect {
-        delete :destroy, {:id => comment.to_param}, valid_session
+        delete :destroy, {:id => comment.to_param, :bookmark_id => @bookmark.id}, valid_session
       }.to change(Comment, :count).by(-1)
     end
 
-    it "redirects to the comments list" do
+    it "redirects to the parent bookmark" do
       comment = Comment.create! valid_attributes
-      delete :destroy, {:id => comment.to_param}, valid_session
-      response.should redirect_to(comments_url)
+      delete :destroy, {:id => comment.to_param, :bookmark_id => @bookmark.id}, valid_session
+      response.should redirect_to(@bookmark)
     end
   end
 
