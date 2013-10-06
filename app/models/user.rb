@@ -8,7 +8,8 @@ class User
 	field :role, type: String
 
 	has_many :bookmarks
-
+	has_many :comments
+	
   validates_presence_of :name
   validates_presence_of :uid
   validates_presence_of :provider

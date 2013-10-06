@@ -1,5 +1,5 @@
 <article>
-  <h3><%= link_to @bookmark.title, @bookmark.url %></h3>
+  <h2><%= link_to @bookmark.title, @bookmark.url %></h2>
   <div><%= @bookmark.description %></div>
   <div class="tags"><%= @bookmark.tags %></div>
   <aside class="meta">
@@ -10,6 +10,14 @@
     <% end %>
   </aside>
 </article>
+
+<section id="comments">
+ 
+<h2>Comments</h2>
+<%= render @bookmark.comments %>
+
+<%= render "comments/form" %>
+</section>
 
 <%= content_for 'section_nav' do %>
   <% if can? :new, Bookmark %>

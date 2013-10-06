@@ -1,4 +1,5 @@
 Bookmarks::Application.routes.draw do
+
   resources :users, only: :show
 
   resources :sessions, only: [:create, :new, :destroy] do
@@ -6,6 +7,7 @@ Bookmarks::Application.routes.draw do
   end
 
   resources :bookmarks do
+    resources :comments, except: [:show, :index, :new]
     collection do
       get 'search'
       get 'feed'

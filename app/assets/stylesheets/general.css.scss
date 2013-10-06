@@ -48,6 +48,7 @@ img {
   font-size: 12px;
   text-align: center;
   text-decoration: none;
+  border: 0;
   &.cancel {
     background-color: #D67777;
   }
@@ -167,15 +168,27 @@ div.main {
         text-decoration: none;
       }
     }
-    .meta {
-      font: 12px/14px 'Open Sans', sans-serif;
+  }
+  #comments {
+    form {
+      margin-top: 15px;
+    }
+    textarea {
+      @include span-columns(7 of 12);
+      margin-bottom: 10px;
+    }
+    div {
+      clear: both;
+    }
+  }
+  .meta {
+    font: 12px/14px 'Open Sans', sans-serif;
+    color: #9C5567;
+    a {
       color: #9C5567;
-      a {
-        color: #9C5567;
-        text-decoration: none;
-        &:hover {
-          font-weight: bold;
-        }
+      text-decoration: none;
+      &:hover {
+        font-weight: bold;
       }
     }
   }

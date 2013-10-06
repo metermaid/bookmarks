@@ -1,0 +1,8 @@
+<div>
+  <%= comment.body %>
+</div>
+<aside class="meta">
+  Posted by <%= comment.user_name %> on <%= comment.created_at.strftime("%B %e, %Y") %>
+	&bullet;
+  <%= link_to 'Delete', [comment.bookmark, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+</aside>

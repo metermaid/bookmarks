@@ -7,9 +7,12 @@ class Bookmark
   field :url, type: String
   field :description, type: String
   field :favourite, type: Mongoid::Boolean
+
   belongs_to :user
+  has_many :comments
 
   validates_presence_of :url
+
   before_save :add_http
 
 	scope :favourites, where(favourite: true)
@@ -25,7 +28,7 @@ class Bookmark
   searchkick
 
   def user_name
-  	if user.present?
+  	if user.present? and user.name.present?
   		user.name
   	else
   		"Anonymous"
