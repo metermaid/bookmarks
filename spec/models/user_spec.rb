@@ -20,6 +20,9 @@ describe User do
       it "returns true and behaves as a user when they have no role" do
   		  expect { @user.has_role?("user").should be_true }
       end
+      it "returns false and behaves as a user when they have no role" do
+        expect { @user.has_role?("admin").should false }
+      end
       before do
         @user.role = "user"
       end

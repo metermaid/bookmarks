@@ -1,0 +1,15 @@
+<article>
+  <h3><%= link_to bookmark.title, bookmark.url %></h3>
+  <div><%= bookmark.description %></div>
+  <div class="tags"><% bookmark.tags_array.each do |tag| %>
+                      <%= link_to "##{tag}", bookmarks_url(:tags => tag) %>
+                    <% end %></div>
+  <aside class="meta">
+    Saved <%= distance_of_time_in_words_to_now(bookmark.created_at) %> ago by <%= bookmark.user_name %> &bullet;
+    <%= comment_link(bookmark) %>
+    <% if can? :update, bookmark %> &bullet;
+      <%= link_to 'Edit', edit_bookmark_path(bookmark) %> &bullet;
+      <%= link_to 'Delete', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </aside>
+</article>
