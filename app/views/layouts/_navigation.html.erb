@@ -6,7 +6,6 @@
 
 <% if current_user %>
 <span>
-    <%= link_to current_user.name, user_path(current_user), class: "button secondary #{"active" if @menu_item == "profile"}", id: "profile" %>
     <%= link_to "Logout", logout_path, method: :delete, class: "button secondary" %>
 </span>
 <% else %>

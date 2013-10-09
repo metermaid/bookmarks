@@ -5,7 +5,7 @@
                       <%= link_to "##{tag}", bookmarks_url(:tags => tag) %>
                     <% end %></div>
   <aside class="meta">
-    Saved <%= distance_of_time_in_words_to_now(bookmark.created_at) %> ago by <%= bookmark.user_name %> &bullet;
+    Saved <%= distance_of_time_in_words_to_now(bookmark.created_at) %> ago by <%= user_link(bookmark.user) %> &bullet;
     <%= comment_link(bookmark) %>
     <% if can? :update, bookmark %> &bullet;
       <%= link_to 'Edit', edit_bookmark_path(bookmark) %> &bullet;

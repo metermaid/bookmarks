@@ -15,11 +15,3 @@
 <div>
 <%= paginate @bookmarks %>
 </div>
-
-<%= content_for 'section_nav' do %>
-  <span><%= link_to 'Latest', bookmarks_path, class: "button active" %></span>
-  <span><%= link_to 'Favourites', bookmarks_path, class: "button" %></span>
-  <% if can? :new, Bookmark %>
-    <span><%= link_to 'New Bookmark', new_bookmark_path, class: "button" %></span>
-  <% end %>
-<% end %>

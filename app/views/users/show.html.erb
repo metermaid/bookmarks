@@ -1,3 +1,15 @@
-<h2><%= @user.name %></h2>
-<article>
-</article>
+<section>
+  <h2><%= user_name(@user) %></h2>
+  <% @items.each do |item| %>
+    <%= render item %>
+  <% end %>
+
+  <% if @items.empty? %>
+    <article>
+      <p>No items were found.</p>
+    </article>
+  <% end %>
+</section>
+<div>
+<%= paginate @items %>
+</div>

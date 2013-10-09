@@ -6,9 +6,3 @@
 
   <%= render "comments/form" if can? :create, Comment %>
 </section>
-
-<%= content_for 'section_nav' do %>
-  <% if can? :new, Bookmark %>
-    <span><%= link_to 'New Bookmark', new_bookmark_path, class: "button" %></span>
-  <% end %>
-<% end %>

@@ -1,9 +1,9 @@
-<div>
-  <%= comment.body %>
-</div>
-<aside class="meta">
-  Posted by <%= comment.user_name %> on <%= comment.created_at.strftime("%B %e, %Y") %>
-  <% if can? :update, comment %>
-  	&bullet; <%= link_to 'Delete', [comment.bookmark, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
-	<% end %>
-</aside>
+<article>
+	<div><%= raw '&ldquo;' unless current_page?(bookmark_path(comment.bookmark)) %><%= comment.body %><%= raw '&rdquo;' unless current_page?(bookmark_path(comment.bookmark)) %></div>
+	<aside class="meta">
+		Posted by <%= user_link(comment.user) %> on <%= comment.created_at.strftime("%B %e, %Y") %> <%= 'in ' unless current_page?(bookmark_path(comment.bookmark)) %><%= link_to "#{comment.bookmark.title}", comment.bookmark unless current_page?(bookmark_path(comment.bookmark)) %>
+	  <% if can? :update, comment %>
+	  	&bullet; <%= link_to 'Delete', [comment.bookmark, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% end %>
+	</aside>
+</article>
