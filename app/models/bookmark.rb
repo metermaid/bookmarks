@@ -1,4 +1,5 @@
 require 'uri'
+require 'pismo'
 
 class Bookmark
   include Mongoid::Document
@@ -15,7 +16,7 @@ class Bookmark
 
   validates_presence_of :url
   validates :url, :format => URI::regexp(%w(http https))
-
+  before_create :scrape_info
 
 	scope :favourites, where(favourite: true)
 	scope :by_date, (lambda do |date| 
@@ -39,6 +40,17 @@ class Bookmark
 
   def search_data
     as_json only: [:title, :descrption, :tags]
+  end
+
+  private
+
+  def scrape_info
+    if title.blank? || description.blank? || tags.blank?
+      doc = Pismo::Document.new(url)
+      self.title = doc.title
+      self.description = doc.description || doc.lede
+      self.tags = doc.keywords.map {|item| item.first }.join(",")
+    end
   end
 
 end
