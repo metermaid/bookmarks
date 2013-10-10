@@ -1,4 +1,5 @@
 <article>
+  <h3><%= bookmark.picture_url if bookmark.picture? %></h3>
   <h3><%= link_to bookmark.title, bookmark.url %></h3>
   <div><%= bookmark.description %></div>
   <div class="tags"><% bookmark.tags_array.each do |tag| %>

@@ -12,20 +12,26 @@ gem "heroku"
 gem 'mongoid', github: 'mongoid/mongoid'
 
 # content / plugin-y
-gem 'searchkick' #searching
+gem 'searchkick' # searching
 gem 'mongoid_taggable' # tags
 gem 'pismo' # scraping for links
 # gem 'link_thumbnailer' # scraping for thumbs
-gem 'high_voltage' #static pages
+gem 'high_voltage' # static pages
 # gem "analytics-ruby"
-gem 'kaminari' #pagination
+gem 'kaminari' # pagination
+
+# uploading
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid' # image uploads
+gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs' # for carrierwave?
+
 
 # asset-y
 #gem 'sass-rails', github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem 'uglifier', '>= 1.0.3'
 gem "therubyracer"
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "less-rails" # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "neat" # Grid & Useful SASS mixins
 gem 'jquery-rails'
 # gem "simple_form", ">= 2.1.0"

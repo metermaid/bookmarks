@@ -11,6 +11,8 @@ class Bookmark
   field :description, type: String
   field :favourite, type: Mongoid::Boolean
 
+  mount_uploader :picture, PictureUploader
+
   belongs_to :user
   has_many :comments, :dependent => :destroy
 
@@ -46,10 +48,11 @@ class Bookmark
 
   def scrape_info
     if title.blank? || description.blank? || tags.blank?
-      doc = Pismo::Document.new(url)
+      doc = Pismo::Document.new(url, :all_images => true)
       self.title = doc.title
       self.description = doc.description || doc.lede
       self.tags = doc.keywords.map {|item| item.first }.join(",")
+      self.remote_picture_url = doc.images.first if doc.images.present?
     end
   end
 
