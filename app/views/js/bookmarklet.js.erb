@@ -1,0 +1,42 @@
+(function() {
+  function create_container(id) {
+    var container = document.createElement("div");
+    container.id = id;
+    container.innerHTML = "<%= escape_javascript(render( :partial => "shared/ui", :locals => {:api_key => params[:k]}))%>";
+    document.body.appendChild(container);
+  };
+
+  function save_link() {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "<%= bookmarks_create_url(:format => 'js') %>?callback=save_link_complete&api_key=<%= params["api_key"] %>&link[url]=" + encodeURI(window.location.href);
+    script.id = "bookmarks-loadJSONP";
+    document.body.appendChild(script);
+  }
+  
+  create_container("bookmarks-container");
+  save_link();
+})();
+
+function save_link_complete(data) {
+  if(data.status == "success") {
+    set_status("<%= escape_javascript(render("shared/saved")) %>");
+  } else {
+    set_status("<%= escape_javascript(render("shared/error")) %>");
+  }
+
+  var s = document.getElementById("bookmarks-loadJSONP");
+  s.parentNode.removeChild(s);
+
+  setTimeout(close_container, 750);
+}
+
+function set_status(content) {
+  document.getElementById("bookmarks-status").innerHTML = content;
+}
+
+function close_container() {
+  var container = document.getElementById('bookmarks-container');
+  container.style.display = 'none';
+  container.parentNode.removeChild(container);
+}

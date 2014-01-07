@@ -20,6 +20,8 @@ Bookmarks::Application.routes.draw do
   delete '/logout' => 'sessions#destroy', :as => :logout
   get '/login' => 'sessions#new', :as => :login
 
+  get "js/bookmarklet(.:format)" => "js#bookmarklet", :as => :bookmarklet
+
   root :to => 'bookmarks#index'
 
 
