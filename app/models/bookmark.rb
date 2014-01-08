@@ -9,6 +9,7 @@ class Bookmark
   field :title, type: String
   field :url, type: String
   field :description, type: String
+  field :full_text, type: String
   field :favourite, type: Mongoid::Boolean
 
   mount_uploader :picture, PictureUploader
@@ -41,7 +42,7 @@ class Bookmark
   end
 
   def search_data
-    as_json only: [:title, :descrption, :tags]
+    as_json only: [:title, :description, :tags, :full_text]
   end
 
   private
@@ -51,6 +52,7 @@ class Bookmark
       doc = Pismo::Document.new(url, :all_images => true)
       self.title = doc.title
       self.description = doc.description || doc.lede
+      self.full_text = doc.body
       self.tags = doc.keywords.map {|item| item.first }.join(",")
       self.remote_picture_url = doc.images.first if doc.images.present?
     end
