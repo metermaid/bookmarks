@@ -1,5 +1,6 @@
 class BookmarksController < ApplicationController
   load_and_authorize_resource
+  skip_load_and_authorize_resource only: :ajax_create
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
   before_action :set_menuitem, only: [:index, :new]
   respond_to :js, :html
@@ -49,11 +50,22 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/ajax_create
   def ajax_create
-    @bookmark = Bookmark.new(url: params[:url])
-    @bookmark.user = current_user
+    if session[:user_id]
+      begin
+        current_user ||= User.find(session[:user_id])
+      rescue Mongoid::Errors::DocumentNotFound
+        render :json => { "logged_in" => false }.to_json, :callback => params[:callback]
+      end
 
-    @bookmark.save
-    render :json => @bookmark, :callback => params[:callback]
+      @bookmark = Bookmark.new(url: params[:url])
+      @bookmark.user = current_user
+
+      @bookmark.save
+      render :json => @bookmark, :callback => params[:callback]
+    else
+      render :json => { "logged_in" => false }.to_json, :callback => params[:callback]
+    end
+
   end
 
   # POST /bookmarks

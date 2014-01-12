@@ -19,7 +19,9 @@
 })();
 
 function save_link_complete(data) {
-  if(data.errors == undefined) {
+  if (data.logged_in == false) {
+    set_status("<%= escape_javascript(render("shared/not_logged_in")) %>");
+  } else if (data.errors == undefined) {
     set_status("<%= escape_javascript(render("shared/saved")) %>");
   } else {
     set_status("<%= escape_javascript(render("shared/error")) %>");
