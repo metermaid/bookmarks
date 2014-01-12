@@ -9,6 +9,7 @@ Bookmarks::Application.routes.draw do
   resources :bookmarks do
     resources :comments, except: [:show, :index, :new]
     collection do
+      get 'ajax_create'
       get 'search'
       get 'feed'
     end

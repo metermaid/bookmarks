@@ -2,6 +2,7 @@ class BookmarksController < ApplicationController
   load_and_authorize_resource
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
   before_action :set_menuitem, only: [:index, :new]
+  respond_to :js, :html
 
   # GET /bookmarks
   def index
@@ -44,6 +45,15 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/1/edit
   def edit
+  end
+
+  # GET /bookmarks/ajax_create
+  def ajax_create
+    @bookmark = Bookmark.new(url: params[:url])
+    @bookmark.user = current_user
+
+    @bookmark.save
+    render :json => @bookmark, :callback => params[:callback]
   end
 
   # POST /bookmarks

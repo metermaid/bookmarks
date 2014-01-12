@@ -9,7 +9,7 @@
   function save_link() {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "<%= bookmarks_create_url(:format => 'js') %>?callback=save_link_complete&api_key=<%= params["api_key"] %>&link[url]=" + encodeURI(window.location.href);
+    script.src = "<%= ajax_create_bookmarks_url %>?callback=save_link_complete&url=" + encodeURI(window.location.href);
     script.id = "bookmarks-loadJSONP";
     document.body.appendChild(script);
   }
@@ -19,7 +19,7 @@
 })();
 
 function save_link_complete(data) {
-  if(data.status == "success") {
+  if(data.errors == undefined) {
     set_status("<%= escape_javascript(render("shared/saved")) %>");
   } else {
     set_status("<%= escape_javascript(render("shared/error")) %>");
@@ -28,7 +28,7 @@ function save_link_complete(data) {
   var s = document.getElementById("bookmarks-loadJSONP");
   s.parentNode.removeChild(s);
 
-  setTimeout(close_container, 750);
+  setTimeout(close_container, 100000);
 }
 
 function set_status(content) {

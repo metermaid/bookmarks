@@ -10,6 +10,9 @@
     </article>
   <% end %>
 </section>
+<section>
+	<%= link_to "Bookmarklet", render("shared/bookmarklet.js", formats: [:js]) %>
+</section>
 <div>
 <%= paginate @items %>
 </div>
