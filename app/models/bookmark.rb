@@ -18,7 +18,7 @@ class Bookmark
   validates :url, :format => URI::regexp(%w(http https))
   before_create :scrape_info
 
-	scope :favourites, where(favourite: true)
+	scope :favourites, ->{ where(favourite: true) }
 	scope :by_date, (lambda do |date| 
 	  dt = DateTime.strptime(date, "%Y-%m-%d")
 	  bod = dt.beginning_of_day

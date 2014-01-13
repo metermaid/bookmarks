@@ -3,7 +3,7 @@
 <% if can? :new, Bookmark %>
   <span><%= link_to 'New Bookmark', new_bookmark_path, class: "button #{"active" if @menu_item == "new"}", id: "new" %></span>
 <% end %>
-
+<span><%= link_to 'Help', page_path("help"), class: "button #{"active" if @menu_item == "help"}", id: "help" %></span>
 <% if current_user %>
 <span>
     <%= link_to "Logout", logout_path, method: :delete, class: "button secondary" %>

@@ -6,6 +6,8 @@ Bookmarks::Application.routes.draw do
     get 'failure'
   end
 
+  get "/pages/*id" => 'pages#show', as: :page, format: false
+
   resources :bookmarks do
     resources :comments, except: [:show, :index, :new]
     collection do
