@@ -21,15 +21,13 @@ Because I've been deploying on Heroku myself, this should be reasonably straight
 
 1. Sign up for a Heroku account if you haven't already.
 2. Install the Heroku gem or the Heroku CLI: http://devcenter.heroku.com/articles/heroku-command
-3. Clone this app `git clone git@github.com:metermaid/bookmarks.git bookmarks
-4. Create the app on Heroku (replace myapp with something unique): `heroku create myapp
-5. You'll need to add both MongoDB and Elasticsearch to your app: `heroku addons:add mongolab
-   `heroku addons:add bonsai
-   If you use bonsai and mongolab, no further configuration should be necessary.
+3. Clone this app `git clone git@github.com:metermaid/bookmarks.git bookmarks`
+4. Create the app on Heroku (replace myapp with something unique): `heroku create myapp`
+5. You'll need to add both MongoDB and Elasticsearch to your app. If you use bonsai and mongolab, no further configuration should be necessary. To do so, run: `heroku addons:add mongolab` and `heroku addons:add bonsai`.
 6. We're using Omniauth (other service providers) as our only login option-- there's one less password to memorize. You'll need to setup an app in Twitter/Facebook/Linkedin/Github/etc. I recommend a Twitter app, as it's widely used and has less of a 'privacy-invasive' feel than Facebook. You can set up a Twitter app here: https://dev.twitter.com/apps/new
 7. Rename omniauth.rb.example to omniauth.rb, and change the key and secret from the app created in the previous step.
-8. Push your application to Heroku: `git push heroku master
-9. The app should work now, open it with `heroku open
+8. Push your application to Heroku: `git push heroku master`
+9. The app should work now, open it with `heroku open`
 
 ##Somewhat Neat Features
 - Tagging
