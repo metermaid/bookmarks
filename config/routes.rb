@@ -14,6 +14,7 @@ Bookmarks::Application.routes.draw do
       get 'feed'
     end
   end
+  get 'tags/:tags' => 'bookmarks#index', :as => :tags
   get '/feed/' => 'bookmarks#feed', defaults: { format: 'atom' }
 
   get '/auth/:provider/callback' => 'sessions#create'

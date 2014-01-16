@@ -33,11 +33,10 @@ Because I've been deploying on Heroku myself, this should be reasonably straight
 - Tagging
 - Search
 - Comments
-- Favourites (These are more like 'highlights')
+- Admin Favourites
 - Daily digest RSS feed
 - Bookmarklet
 
 ##Coming Soon
-- Scraping for thumbnails, etc.
-- Tag page
+- Scraping for thumbnails
 - Daily digest mailings
