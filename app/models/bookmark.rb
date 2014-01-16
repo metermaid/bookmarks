@@ -5,6 +5,7 @@ class Bookmark
   include Mongoid::Document
   include Mongoid::Taggable
 	include Mongoid::Timestamps
+  extend Dragonfly::Model
 
   field :title, type: String
   field :url, type: String
@@ -12,7 +13,10 @@ class Bookmark
   field :full_text, type: String
   field :favourite, type: Mongoid::Boolean
 
-  mount_uploader :picture, PictureUploader
+  field :thumbnail_uid, type: String
+  field :thumbnail_name, type: String
+
+  dragonfly_accessor :thumbnail
 
   belongs_to :user
   has_many :comments, :dependent => :destroy
@@ -54,7 +58,7 @@ class Bookmark
       self.description = doc.description || doc.lede
       self.full_text = doc.body
       self.tags = doc.keywords.map {|item| item.first }.join(",")
-      self.remote_picture_url = doc.images.first if doc.images.present?
+      self.thumbnail_url = doc.images.first
     end
   end
 

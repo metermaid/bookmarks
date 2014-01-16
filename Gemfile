@@ -21,10 +21,7 @@ gem 'high_voltage' # static pages
 gem 'kaminari' # pagination
 
 # uploading
-gem 'carrierwave'
-gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid' # image uploads
-gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs' # for carrierwave?
-
+gem 'dragonfly', '~> 1.0.2'
 
 # asset-y
 #gem 'sass-rails', github: 'rails/sass-rails'
