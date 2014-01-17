@@ -147,6 +147,10 @@ div.main {
     @include span-columns(12 of 12);
     margin: 5px 0 20px;
     padding: 0 3px;
+    img.thumbnail {
+      float: left;
+      margin-right: 5px;
+    }
     .field {
       margin-bottom: 10px;
       overflow: auto;

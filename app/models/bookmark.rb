@@ -23,7 +23,7 @@ class Bookmark
 
   validates_presence_of :url
   validates :url, :format => URI::regexp(%w(http https))
-  before_create :scrape_info
+  after_validation :scrape_info
 
 	scope :favourites, where(favourite: true)
 	scope :by_date, (lambda do |date| 
@@ -58,6 +58,7 @@ class Bookmark
       self.description = doc.description || doc.lede
       self.full_text = doc.body
       self.tags = doc.keywords.map {|item| item.first }.join(",")
+
       self.thumbnail_url = doc.images.first
     end
   end
