@@ -59,7 +59,7 @@ class Bookmark
       self.full_text = doc.body
       self.tags = doc.keywords.map {|item| item.first }.join(",")
 
-      self.thumbnail_url = doc.images.first
+      self.thumbnail_url = doc.images.first if doc.images.present?
     end
   end
 
