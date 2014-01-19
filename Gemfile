@@ -22,6 +22,7 @@ gem 'kaminari' # pagination
 
 # uploading
 gem 'dragonfly', '~> 1.0.2'
+gem 'dragonfly-s3_data_store'
 
 # asset-y
 #gem 'sass-rails', github: 'rails/sass-rails'
