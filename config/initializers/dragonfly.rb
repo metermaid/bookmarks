@@ -9,9 +9,14 @@ Dragonfly.app.configure do
 
   url_format "/media/:job/:name"
 
-  datastore :file,
-    root_path: Rails.root.join('public/system/dragonfly', Rails.env),
-    server_root: Rails.root.join('public')
+  datastore :s3,
+    bucket_name: 'bookmarksrita',
+    access_key_id: '***REMOVED***',
+    secret_access_key: '***REMOVED***'
+
+#   datastore :file,
+#   root_path: Rails.root.join('public/system/dragonfly', Rails.env),
+#   server_root: Rails.root.join('public')
 end
 
 # Logger
