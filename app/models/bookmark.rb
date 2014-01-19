@@ -16,9 +16,7 @@ class Bookmark
   field :thumbnail_uid, type: String
   field :thumbnail_name, type: String
 
-  dragonfly_accessor :thumbnail do
-    copy_to(:smaller_thumbnail){|a| a.thumb('110x75#') }
-  end
+  dragonfly_accessor :thumbnail
 
   belongs_to :user
   has_many :comments, :dependent => :destroy
