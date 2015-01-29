@@ -23,7 +23,8 @@ class Bookmark
 
   validates_presence_of :url
   validates :url, :format => URI::regexp(%w(http https))
-  after_validation :scrape_info
+  
+  after_create :scrape_info
 
 	scope :favourites, where(favourite: true)
 	scope :by_date, (lambda do |date| 
@@ -36,6 +37,16 @@ class Bookmark
 
   paginates_per 7
   searchkick
+
+  alias_method :actual_title, :title
+
+  def title
+    if actual_title.present?
+      actual_title
+    else
+      url
+    end
+  end
 
   def user_name
   	if user.present? and user.name.present?
