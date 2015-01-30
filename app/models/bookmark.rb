@@ -54,12 +54,12 @@ class Bookmark
   def scrape_info
     if title.blank? || description.blank? || tags.blank?
       doc = Pismo::Document.new(url, :all_images => true)
-      self.title = doc.title
-      self.description = doc.description || doc.lede
+      self.title = doc.title if title.blank?
+      self.description = doc.description || doc.lede if description.blank?
       self.full_text = doc.body
-      self.tags = doc.keywords.map {|item| item.first }.join(",")
+      self.tags = doc.keywords.map {|item| item.first }.join(",") if tags.blank?
 
-      self.thumbnail_url = doc.images.first if doc.images.present?
+      self.thumbnail_url = doc.images.first if doc.images.present? && self.thumbnail.blank?
     end
   end
 
