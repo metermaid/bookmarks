@@ -24,7 +24,7 @@ class Bookmark
   validates_presence_of :url
   validates :url, :format => URI::regexp(%w(http https))
   
-  after_create :scrape_info
+  after_validation :scrape_info
 
 	scope :favourites, where(favourite: true)
 	scope :by_date, (lambda do |date| 
@@ -38,11 +38,9 @@ class Bookmark
   paginates_per 7
   searchkick
 
-  alias_method :actual_title, :title
-
-  def title
-    if actual_title.present?
-      actual_title
+  def print_title
+    if title.present?
+      title
     else
       url
     end

@@ -1,6 +1,6 @@
 <article>
   <%= image_tag bookmark.thumbnail.thumb('110x75#').url, class: 'thumbnail' if bookmark.thumbnail.present? %>
-  <h3><%= link_to bookmark.title, bookmark.url %></h3>
+  <h3><%= link_to bookmark.print_title, bookmark.url %></h3>
   <div><%= bookmark.description %></div>
   <div class="tags"><% bookmark.tags_array.each do |tag| %>
                       <%= link_to "##{tag}", tags_url(:tags => tag) %>
